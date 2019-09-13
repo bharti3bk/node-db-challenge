@@ -11,7 +11,27 @@ router.get('/' ,(req , res) => {
     .catch(err => {
         res.json(err)
     })
+})   
+
+router.get('/' , (req, res) => {
+    db.getAlResources() 
+    .then(resources => {
+        res.json(resources)
+    }) 
+    .catch(err => {
+        res.json(err)
+    })
 })  
+
+router.get( '/' , (req, res) => {
+    db.getAllTasks()
+    .then(tasks => {
+        res.json(tasks)
+    }) 
+    .catch(err => {
+        res.json(err)
+    })
+})
  
 router.post('/' , (req , res) => { 
     const projectData = req.body; 
@@ -23,7 +43,18 @@ router.post('/' , (req , res) => {
     .catch(err => {
         res.json(err)
     })
-}) 
+})  
+
+router.post('/' , (req,res) => {
+    const resourceData = req.body; 
+    db.AddResource(resourceData) 
+    .then(resource => {
+        res.json(resource)
+    }) 
+    .catch(err => {
+        res.json(err);
+    })
+})
 
 router.get('/:id' , (req , res) => {
     const {id} = req.params;
@@ -40,5 +71,6 @@ router.get('/:id' , (req , res) => {
     .catch(err => {
         res.json(err);
     })
-}) 
+})   
+
 module.exports = router;

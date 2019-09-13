@@ -6,7 +6,11 @@ module.exports = {
     getById, 
     AddResource, 
     getAlResources , 
-    getAllTasks
+    getAllTasks,
+    AddTasks,
+    findTaskById ,
+    findResourceById
+
 }  
 
 function getAllProjects(){
@@ -42,7 +46,19 @@ function getById(id)
           return null;
        }
     })
-}
+}   
+
+function findTaskById(id) {
+    return db("tasks")
+      .where({ id: id })
+      .then(task => {
+        if (task) {
+          return task[0];
+        } else {
+          return null;
+        }
+      });
+  }
 
 function AddProjects(project) {
     return db('project') 
@@ -50,12 +66,32 @@ function AddProjects(project) {
     .then(id => {
         return getById(id[0]);
     })
-} 
+}  
+
+function findResourceById(id) {
+    return db("resources")
+      .where({ id: id })
+      .then(resource => {
+        if (resource) {
+          return resource[0];
+        } else {
+          return null;
+        }
+      });
+  }
 
 function AddResource(resource) {
-    return db('resources') 
+    return db('resource') 
     .insert(resource)
     .then(id => {
-        return getById(id[0]);
+        return findResourceById(id[0]);
+    }) 
+}  
+
+function AddTasks(task){
+    return db('task')
+    .insert(task) 
+    .then(id => {
+        return findTaskById(id[0]);
     })
 }
