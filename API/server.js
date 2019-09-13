@@ -4,9 +4,5 @@ const router = require('../Routers/dataRouter.js')
 const server = express();
 
 server.use(express.json()); 
-server.use('/api/projects' , router);  
-server.get('/' , (req ,res) => {
-    console.log("Hello from Express...")
-})
-
+server.use('/api/projects' , router); 
 module.exports = server;
