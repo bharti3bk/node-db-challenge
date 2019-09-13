@@ -5,27 +5,17 @@ module.exports = {
     AddProjects,
     getById, 
     AddResource, 
-    getAlResources , 
     getAllTasks,
     AddTasks,
     findTaskById ,
     findResourceById
-
 }  
-
 function getAllProjects(){
     return db('projects') 
     .then(projects => {
         return projects;
     })  
 }   
-
-function getAlResources(){
-    return db('resources') 
-    .then(resources => {
-        return resources;
-    })
-} 
 
 function getAllTasks(){
     return db('tasks')
@@ -66,27 +56,7 @@ function AddProjects(project) {
     .then(id => {
         return getById(id[0]);
     })
-}  
-
-function findResourceById(id) {
-    return db("resources")
-      .where({ id: id })
-      .then(resource => {
-        if (resource) {
-          return resource[0];
-        } else {
-          return null;
-        }
-      });
-  }
-
-function AddResource(resource) {
-    return db('resource') 
-    .insert(resource)
-    .then(id => {
-        return findResourceById(id[0]);
-    }) 
-}  
+}   
 
 function AddTasks(task){
     return db('task')

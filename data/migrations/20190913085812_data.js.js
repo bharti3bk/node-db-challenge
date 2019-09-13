@@ -35,12 +35,10 @@ exports.up = function(knex) {
                 .integer("project_id")
                 .unsigned()
                 .inTable("projects")
-                .notNullable()
                 .references("id")
            table
                 .integer("resource_id")
                 .unsigned()
-                .notNullable() 
                 .references("id")
                 .inTable("resources")
            table.primary(["project_id","resource_id"])
