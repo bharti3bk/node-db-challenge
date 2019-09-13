@@ -21,14 +21,17 @@ exports.up = function(knex) {
         })
         .createTable("tasks", table => { 
 
-           table.increments(); 
-
-            table.text("description"); 
-            
-             table.boolean("completed").notNullable();
-
-            table.text("notes");
+           table.increments();  
            
+            table.text("description", 255).notNullable();
+            
+             table.boolean("completed").notNullable().defaultTo(false);
+
+            table.text("notes"); 
+            table.integer("project_id")
+            .unsigned()
+            .references("id")
+            .inTable("projects") 
         })
         .createTable("project_resources",table=> {
            table
